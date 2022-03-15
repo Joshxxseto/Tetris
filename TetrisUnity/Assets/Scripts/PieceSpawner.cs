@@ -5,13 +5,24 @@ using UnityEngine;
 public class PieceSpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] Pieces;
+    [SerializeField] Transform nextPiecePos;
+    public GameObject currentPiece, nextPiece;
     private void Start()
     {
+        int i = Random.Range(0, Pieces.Length);
+        nextPiece = Instantiate(Pieces[i], this.transform.position, Quaternion.identity);
         SpawnPiece();
     }
-    void SpawnPiece()
+    public void SpawnPiece()
     {
-        int i = Random.Range(0,Pieces.Length-1);
-        Instantiate(Pieces[i],this.transform.position,Quaternion.identity);
+        currentPiece = nextPiece;
+        currentPiece.GetComponent<Piece>().enabled = true;
+        currentPiece.transform.position = this.transform.position;
+        //Preparar Siguiente pieza
+        int i = Random.Range(0,Pieces.Length);
+        nextPiece=Instantiate(Pieces[i],nextPiecePos.position,Quaternion.identity);
+        nextPiece.GetComponent<Piece>().enabled = false;
+        
+        GridHelper.CleanPieces();
     }
 }

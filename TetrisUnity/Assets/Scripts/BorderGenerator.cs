@@ -17,20 +17,20 @@ public class BorderGenerator : MonoBehaviour
         //Es decir el borde será de 12x22 sin Techo
 
         //Mediante un ciclo for de 12 instancias crearemos los bloques de abajo
-        Origin = new Vector2(-1,-1);
+        Origin = new Vector2(-0.5f,-1f);
         for (int i=0;i<12;i++)
         {
-            Origin.x = i-1;
+            Origin.x = i-1f;
             Instantiate(BlockPrefab,this.transform).transform.position=Origin;
         }
-        Origin = new Vector2(-1,-1);
+        Origin = new Vector2(-0.5f,-0.5f);
         //Esta vez Crearemos los bloques para la torre Izquiera y derecha
         for (int i=0;i<21;i++)
         {
-            Origin.y = i - 1;
-            Origin.x = -1;//Izq
+            Origin.y = i - 1f;
+            Origin.x = -1f;//Izq
             Instantiate(BlockPrefab,this.transform).transform.position = Origin;
-            Origin.x = 10;//Der
+            Origin.x = 10f;//Der
             Instantiate(BlockPrefab, this.transform).transform.position = Origin;
         }
     }

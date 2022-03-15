@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridHelper : MonoBehaviour
 {
-    public static int width = 10, height = 20;
+    public static int width = 10, height = 20+4;
     public static Transform[,] grid = new Transform[width,height];
 
     public static Vector2 RoundVector(Vector2 v)
@@ -83,10 +83,21 @@ public class GridHelper : MonoBehaviour
                 //De ser así, se borrará
                 DeleteRow(y);
                 //La fila de arriba será empujada
-                PushRow(y+1);
+                PushRowAbove(y+1);
                 //hay que comprobar que la filaempuejada no este completa
                 //Esto lo hacemos restando el valor de la Y en el for
                 y--;
+            }
+        }
+    }
+
+    public static void CleanPieces()
+    {
+        foreach (GameObject piece in GameObject.FindGameObjectsWithTag("Piece"))
+        {
+            if (piece.transform.childCount <= 0)
+            {
+                Destroy(piece);
             }
         }
     }
